@@ -15,23 +15,29 @@ public class SpringSecurityConfiguration {
 
     @Bean
     public InMemoryUserDetailsManager createUserDetailsManager() {
-        //Lambda function that has a String as input and output
-        Function<String, String> passwordEncoder
-                = input -> passwordEncoder().encode(input);
+        UserDetails userDetails1 = createNewUser("Pablo", "4dm1N");
+        UserDetails userDetails2 = createNewUser("Admin", "Admin");
 
-        UserDetails userDetails = User.builder()
-                                    .passwordEncoder(passwordEncoder)
-                                    .username("Pablo")
-                                    .password("4dm1N")
-                                    .roles("USER", "ADMIN")
-                                    .build();
-
-        return new InMemoryUserDetailsManager(userDetails);
+        return new InMemoryUserDetailsManager(userDetails1, userDetails2);
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    private UserDetails createNewUser(String username, String password) {
+        //Lambda function that has a String as input and output
+        Function<String, String> passwordEncoder
+                = input -> passwordEncoder().encode(input);
+
+        UserDetails userDetails = User.builder()
+                .passwordEncoder(passwordEncoder)
+                .username(username)
+                .password(password)
+                .roles("USER", "ADMIN")
+                .build();
+        return userDetails;
     }
 
 }
