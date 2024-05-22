@@ -16,9 +16,16 @@
             <form:errors path="targetDate" cssClass="text-warning"/>
         </fieldset>
 
-        <form:input type="hidden" path="id"/>
+        <fieldset class="mb-3">
+            <form:label path="done">Done: </form:label>
+            <form:select path="done" cssClass="custom-select">
+                <form:option value="false">False</form:option>
+                <form:option value="true">True</form:option>
+            </form:select>
+            <form:errors path="done" cssClass="text-warning"/>
+        </fieldset>
 
-        <form:input type="hidden" path="done"/>
+        <form:input type="hidden" path="id"/>
 
         <input type="submit" class="btn btn-success"/>
     </form:form>
