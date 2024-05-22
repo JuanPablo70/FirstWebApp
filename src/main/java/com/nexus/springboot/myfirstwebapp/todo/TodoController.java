@@ -76,7 +76,7 @@ public class TodoController {
     }
 
     /***
-     * Gets the name of teh current username
+     * Gets the name of the current username
      * @return username
      */
     private String getLoggedInUsername(ModelMap model) {
